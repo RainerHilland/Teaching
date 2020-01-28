@@ -1,5 +1,2 @@
-install.packages("tidyverse")
-install.packages("rmarkdown")
-install.packages("httr")
-install.packages("shinydashboard")
-insatll.packages("leaflet")
+install.packages("tidyr")
+install.packages("ggplot2")
