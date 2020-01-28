@@ -85,7 +85,12 @@ solarZenith <- function(elevation) { # returns solar zenith in degrees, requires
 
 solarAzimuth <- function(latitudeRadians, declination, hourAngle, elevationRadians) { # returns solar azimuth
   # assumes all input variables are already in radians
+  
+  oldw <- getOption("warn") # suppress warnings here because something's not working 100% right
+  options(warn = -1)
+  
   azimuth <- acos( (sin(declination)*cos(latitudeRadians)-cos(declination)*sin(latitudeRadians)*cos(hourAngle))/cos(elevationRadians) )
+
   
   if (hourAngle > 0) { # past noon we do 360-azimuth
     az <- 360-radToDeg(azimuth)
@@ -96,6 +101,8 @@ solarAzimuth <- function(latitudeRadians, declination, hourAngle, elevationRadia
   if (is.nan(az)) { # handling errors I don't understand
     az <- 180
   }
+  
+  options(warn=oldw) # turn warnings back on
   
   return(az)
 }
